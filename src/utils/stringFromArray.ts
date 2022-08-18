@@ -1,3 +1,4 @@
 export const stringFromArray = (array: number[]) => {
-    return JSON.stringify(array.sort())
+    const temp = [...array]
+    return JSON.stringify(temp.sort())
 }

@@ -12,11 +12,13 @@ import {
   clearActiveCeil,
   minesweeperActions,
 } from './minesweeper-slice'
-
+import { SagaIterator } from 'redux-saga';
 
 
 // worker Sagas
-export function* pressStartWorker() {
+export function* pressStartWorker(action: any): SagaIterator  {
+  yield put(setBid(action.payload.bid)) // + скроет игровое поле
+
   // закрываем модалку
   yield put(viewModal(''))
   
@@ -74,7 +76,7 @@ export function* winWorker() {
     yield put(viewModal('startGame')) // открывает стартовое диалоговое окно игры
     
   } else {
-    yield take("GAME/NEXT_ROUND")
+    yield take(minesweeperActions.nextRound.type)
     yield put(viewModal(''))
     yield put(setBid( bid + 1 ))
   }
@@ -98,17 +100,17 @@ export function* LoseWorker() {
 }
 
 // watcher Sagas
-export function* start() {
+export function* start(): SagaIterator  {
   yield takeEvery(minesweeperActions.pressStart.type, pressStartWorker)
   // yield takeEvery('GAME/PRESS_START', pressStartWorker)
 }
 
 export function* win() { 
-  yield takeEvery('GAME/WIN', winWorker)
+  yield takeEvery(minesweeperActions.win.type, winWorker)
 }
 
 export function* lose() { 
-  yield takeEvery('GAME/LOSE', LoseWorker)
+  yield takeEvery(minesweeperActions.lose.type, LoseWorker)
 }
 
 // notice how we now only export the rootSaga

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { win, lose } from "../../store/minesweeper/minesweeper-slice";
+import { minesweeperActions } from "../../store/minesweeper/minesweeper-slice";
 import { useAppDispatch, useAppSelector } from "../../utils/hooks";
 import { stringFromArray } from "../../utils/stringFromArray";
 import { useTick } from "../../utils/useTick";
@@ -12,7 +12,7 @@ const GameController = () => {
     const correctAnswerList = useAppSelector(s => s.minesweeper.correctAnswerList);
     let delay = useAppSelector(s => s.minesweeper.gameParams.delay); // задержка до взрыва в минутах
 
-    // const clearTick = useTick();
+    const clearTick = useTick();
 
     const endTime = useRef(new Date().getTime() + delay*1000*60) // конвертирую минуты в ms
 
@@ -26,12 +26,11 @@ const GameController = () => {
 
         // победа если оба массива с номерами ячеек равны
         if (stringFromArray(correctAnswerList) === stringFromArray(activeCeilsList)) {
-            dispatch(win())
+            dispatch(minesweeperActions.win())
         } else {
-            if (minutes === 0 && seconds === 0) 
-            //clearTick()
+            if (minutes === 0 && seconds === 0) clearTick()
             // если время вышло диспатчим проиграл иначе сетаем время которое осталось
-            if (minutes + seconds < 0) dispatch(lose()) // "0" показываем на табло
+            if (minutes + seconds < 0) dispatch(minesweeperActions.lose()) // "0" показываем на табло
 
             else setTimeout(() => {
                 setMinutes(minutes)
@@ -40,7 +39,7 @@ const GameController = () => {
 
         }
 
-    }, [correctAnswerList, activeCeilsList, minutes, seconds, dispatch])
+    }, [correctAnswerList, activeCeilsList, minutes, seconds, clearTick, dispatch])
 
     return (
         <>

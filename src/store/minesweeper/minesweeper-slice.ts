@@ -2,8 +2,6 @@ import { createAction, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 const initialState: minsweeperState = {
   modal: 'startGame',
-  // isWinView: false,
-  // isLoseView: false,
   activeCeilsList: [],
   bid: null,
   listOfSteps: [],
@@ -20,12 +18,6 @@ const minesweeper = createSlice({
   name: 'minesweeper',
   initialState,
   reducers: {
-    pressStart(state, action) { // bid = 2 - стартовый номер мины
-        state.bid = action.payload
-    },
-    win(){},
-    lose(){},
-    nextRound(){},
     setLevel(state, action) {
       state.level = action.payload
     },
@@ -35,12 +27,6 @@ const minesweeper = createSlice({
     setSteps(state, action) {
       state.listOfSteps = action.payload
     },
-    // viewWin(state, action) {
-    //   state.isWinView = action.payload
-    // },
-    // viewLose(state, action) {
-    //   state.isLoseView = action.payload
-    // },
     viewModal(state, action) {
       state.modal = action.payload
     },
@@ -63,11 +49,7 @@ const minesweeper = createSlice({
   }
 })
 
-export const { 
-  pressStart,
-  win,
-  lose,
-  nextRound,
+export const {
   setLevel,
   setBid,
   setSteps,
@@ -78,29 +60,26 @@ export const {
   toggleActiveCeil,
 } = minesweeper.actions
 
+
 // actions
 export const minesweeperActions = {
-  pressStart: createAction(`${minesweeper.name}/PRESS_START`, (bid: number) => ({
+  pressStart: createAction(`${minesweeper.name}/PRESS_START`, (bid = 2) => ({
     payload: { bid },
   })),
-  // fetchAll: createAction(`${postsSlice.name}/fetchAll`),
-  // fetchAllSucceeded: postsSlice.actions.fetchAllSucceeded,
-  // update: createAction<Post>(`${postsSlice.name}/update`),
-  // delete: createAction<Post>(`${postsSlice.name}/delete`),
+  win: createAction(`${minesweeper.name}/WIN`),
+  lose: createAction(`${minesweeper.name}/LOSE`),
+  nextRound: createAction(`${minesweeper.name}/NEXT_ROUND`),
 }
 
 // selectors
 // export const selectPosts = (state: RootState) => state.posts.posts
-
 
 // reducer
 export default minesweeper.reducer
 
 // types
 type minsweeperState = {
-  modal: string,
-  // isWinView: boolean,
-  // isLoseView: boolean,
+  modal: 'startGame' | 'youWin' | 'youLose',
   activeCeilsList: number[],
   bid: number | null,
   listOfSteps: number[],

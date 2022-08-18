@@ -1,6 +1,6 @@
 import React, { MouseEvent }  from "react";
 import styled from "styled-components";
-import { minesweeperActions, pressStart, setLevel } from "../../store/minesweeper/minesweeper-slice";
+import { minesweeperActions, setLevel } from "../../store/minesweeper/minesweeper-slice";
 import { useAppDispatch, useAppSelector } from "../../utils/hooks";
 import { variables } from "../../utils/variables";
 import Popup from "../common/Popup";
@@ -39,7 +39,7 @@ const StartGame = () => {
                         <label htmlFor="amount">Взрослый</label>
                     </div>
                 </div>
-                <button onClick={() => dispatch(minesweeperActions.pressStart(2))} className='start__btn'>СТАРТ</button>
+                <button onClick={() => dispatch(minesweeperActions.pressStart())} className='start__btn'>СТАРТ</button>
             </StyledContent>
         </Popup>
     )

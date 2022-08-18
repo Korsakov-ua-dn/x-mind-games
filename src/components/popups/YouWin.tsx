@@ -3,13 +3,13 @@ import React  from "react";
 import Popup from "../common/Popup";
 import styled from "styled-components";
 import { variables } from "../../utils/variables";
-import { nextRound } from "../../store/minesweeper/minesweeper-slice";
+import { minesweeperActions } from "../../store/minesweeper/minesweeper-slice";
 import { useAppDispatch } from "../../utils/hooks";
 
 const YouWin = () => {
     const dispatch = useAppDispatch();
 
-    const nextRoundHandler = () => dispatch(nextRound())
+    const nextRoundHandler = () => dispatch(minesweeperActions.nextRound())
 
     return (
         <Popup>
