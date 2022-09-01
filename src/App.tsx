@@ -5,20 +5,18 @@ import StartGame from "./components/popups/StartGame";
 import YouWin from "./components/popups/YouWin";
 import YouLose from "./components/popups/YouLose";
 import { useEffect } from "react";
-import { preloadAudio } from "./utils/preloadAudio"
-import { useAppSelector } from "./utils/hooks";
+import { useAppDispatch, useAppSelector } from "./utils/hooks";
+import { minesweeperActions } from "./store/minesweeper/minesweeper-slice";
 
 const App = () => {
   const modal = useAppSelector(s => s.minesweeper.modal);
   const bid: number | null = useAppSelector(s => s.minesweeper.bid); // генерируется после клика старт
+  const dispatch = useAppDispatch();
 
-  // пути картинок для предварительной импорта (браузер закэширует и другие компоненты их получат моментально из кэша)
-  // const imagesPath = [
-  //   './assets/img/mine.webp',
-  // ]
-
-  console.log("modal: ", modal);
-  
+  // пути картинок для предварительного импорта (браузер закэширует и другие компоненты их получат моментально из кэша)
+  const imagesPath = [
+    './assets/img/mine.webp',
+  ]
 
   const renderModal = (modal: string) => {
     switch(modal) {
@@ -30,8 +28,8 @@ const App = () => {
   }
 
   useEffect(() => {
-    preloadAudio();
-  }, [])
+    dispatch(minesweeperActions.preloadSounds());
+  }, [dispatch])
 
   return (
     <StyledApp className="App">
@@ -40,10 +38,11 @@ const App = () => {
         <Header/>
         { bid && <GameController/> }
       </div>
-      
-      {/* {imagesPath.map((el, i) => <NotViewImg key={i} imgComponent={require(`${el}`)}/> )} */}
-      
-     { modal && renderModal(modal) }
+
+      { modal && renderModal(modal) }
+
+      {/* Предварительно рендерю картинки для того что бы их закешировал браузер */}
+      {imagesPath.map((el, i) => <NotViewImg key={i} imgComponent={require(`${el}`)}/> )}
       
     </StyledApp>
   );
@@ -68,11 +67,15 @@ const StyledApp = styled.div`
     max-width: 1024px;
     width: 100%;
   }
-  
 `
-// const NotViewImg = styled.div`
-//     position: absolute;
-//     background-image: url(${(props: ThemedStyledProps<Pick<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>, "key" | keyof HTMLAttributes<HTMLDivElement>> & {}, any>) => props.imgComponent});
-//     opacity: 0;
-// `
+
+type NotViewImgProps = {
+  readonly imgComponent: any;
+}
+
+const NotViewImg = styled.div<NotViewImgProps>`
+    position: absolute;
+    background-image: url(${props => props.imgComponent});
+    opacity: 0;
+`
 

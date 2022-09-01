@@ -12,6 +12,7 @@ const initialState: minsweeperState = {
     delay: 0,
     сoefficient: 0,
   },
+  sounds: {},
 }
 
 const minesweeper = createSlice({
@@ -46,6 +47,9 @@ const minesweeper = createSlice({
         return { ...state, activeCeilsList: [...state.activeCeilsList, action.payload] }
       }
     },
+    setSounds(state, action) {
+      state.sounds = action.payload
+    },
   }
 })
 
@@ -58,6 +62,7 @@ export const {
   setGameParams,
   clearActiveCeil,
   toggleActiveCeil,
+  setSounds,
 } = minesweeper.actions
 
 
@@ -69,6 +74,7 @@ export const minesweeperActions = {
   win: createAction(`${minesweeper.name}/WIN`),
   lose: createAction(`${minesweeper.name}/LOSE`),
   nextRound: createAction(`${minesweeper.name}/NEXT_ROUND`),
+  preloadSounds: createAction(`${minesweeper.name}/PRELOAD_SOUNDS`),
 }
 
 // selectors
@@ -90,4 +96,5 @@ type minsweeperState = {
     delay: number,
     сoefficient: number,
   },
+  sounds: any //@todo clarify types
 }

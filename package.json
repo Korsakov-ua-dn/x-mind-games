@@ -13,6 +13,7 @@
     "@types/react": "^18.0.17",
     "@types/react-dom": "^18.0.6",
     "@types/react-router-dom": "^5.3.3",
+    "howler": "^2.2.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^8.0.2",
@@ -65,6 +66,7 @@
     "npm": "8.11.0"
   },
   "devDependencies": {
-    "@types/styled-components": "^5.1.25"
+    "@types/howler": "^2.2.7",
+    "@types/styled-components": "^5.1.26"
   }
 }

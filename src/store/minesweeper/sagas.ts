@@ -10,9 +10,11 @@ import {
   setSteps,
   setCorrectAnswerList,
   clearActiveCeil,
+  setSounds,
   minesweeperActions,
 } from './minesweeper-slice'
 import { SagaIterator } from 'redux-saga';
+import { Howl } from 'howler';
 
 
 // worker Sagas
@@ -78,14 +80,11 @@ export function* winWorker() {
   } else {
     yield take(minesweeperActions.nextRound.type)
     yield put(viewModal(''))
-    yield put(setBid( bid + 1 ))
+    yield put(minesweeperActions.pressStart( bid + 1 ))
   }
 }
 
 export function* LoseWorker() {
-  const aud = new Audio();
-  aud.src = '/boom.mp3';
-  aud.play()
 
   yield call(delay, 0)
   yield put(setBid(null)); // скроет игровое поле до появления новой ставки
@@ -94,9 +93,29 @@ export function* LoseWorker() {
   yield put(viewModal('youLose')) // открывает попап "You Lose"
 
   yield call(delay, 2000)
-  // yield put(viewLose(false))
   yield put(clearActiveCeil()) // очистит список активных ячеек
   yield put(viewModal('startGame')) // открывает стартовое диалоговое окно игры
+}
+
+export function* SoundsWorker() {
+
+  const tick = new Howl({
+    src: ["tick1s.mp3"],
+    // volume: 1,
+    loop: true,
+    // html5: true,
+    // interrupt: true,
+    rate: 1.05,
+  })
+
+  const boom = new Howl({
+    src: ["boom.mp3"],
+    // volume: 1,
+    // loop: true,
+    // html5: true,
+  })
+
+  yield put(setSounds({tick, boom}));
 }
 
 // watcher Sagas
@@ -113,6 +132,10 @@ export function* lose() {
   yield takeEvery(minesweeperActions.lose.type, LoseWorker)
 }
 
+export function* preloadSounds() { 
+  yield takeEvery(minesweeperActions.preloadSounds.type, SoundsWorker)
+}
+
 // notice how we now only export the rootSaga
 // single entry point to start all Sagas at once
 export default function* rootSaga() {
@@ -120,5 +143,6 @@ export default function* rootSaga() {
     start(),
     win(),
     lose(),
+    preloadSounds(),
   ])
 }

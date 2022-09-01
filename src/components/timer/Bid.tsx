@@ -1,7 +1,7 @@
 import React  from "react";
 import styled from 'styled-components';
 // import { variables } from "../../utils/variables";
-import mineImg from "../../assets/img/mine.webp"
+import mineImg from "../../assets/minesweeper/img/mine.webp"
 import { useAppSelector } from "../../utils/hooks";
 
 const Bid = () => {
