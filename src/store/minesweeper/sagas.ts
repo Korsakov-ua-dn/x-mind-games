@@ -69,13 +69,13 @@ export function* pressStartWorker(action: any): SagaIterator  {
 export function* winWorker() {
   const bid: number = yield select((state: RootState) => state.minesweeper.bid)
   yield put(setBid(null)) // скроет игровое поле
-  yield put(viewModal('youWin'))
+  yield put(viewModal('win'))
   yield put(clearActiveCeil()) // очистит список активных ячеек
 
   if (bid === 9) {
     yield call(delay, 2000)
     // yield put(viewWin(false)) // заменить другой модалкой, без кнопки!!!
-    yield put(viewModal('startGame')) // открывает стартовое диалоговое окно игры
+    yield put(viewModal('start')) // открывает стартовое диалоговое окно игры
     
   } else {
     yield take(minesweeperActions.nextRound.type)
@@ -88,13 +88,14 @@ export function* LoseWorker() {
 
   yield call(delay, 0)
   yield put(setBid(null)); // скроет игровое поле до появления новой ставки
+  yield put(viewModal('boom')) // открывает попап "Boom"
 
   yield call(delay, 1000)
-  yield put(viewModal('youLose')) // открывает попап "You Lose"
+  yield put(viewModal('lose')) // открывает попап "Lose"
 
   yield call(delay, 2000)
   yield put(clearActiveCeil()) // очистит список активных ячеек
-  yield put(viewModal('startGame')) // открывает стартовое диалоговое окно игры
+  yield put(viewModal('start')) // открывает стартовое диалоговое окно игры
 }
 
 export function* SoundsWorker() {

@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from "../../utils/hooks";
 import { variables } from "../../utils/variables";
 import Popup from "../common/Popup";
 
-const StartGame = () => {
+const Start = () => {
     const dispatch = useAppDispatch();
     const level = useAppSelector(s => s.minesweeper.level);
 
@@ -45,12 +45,16 @@ const StartGame = () => {
     )
 };
 
-export default React.memo(StartGame);
+export default React.memo(Start);
 
 const StyledContent = styled.div`
 &.start {
     display: flex;
     flex-direction: column;
+    max-width: 330px;
+    width: 100%;
+    padding: 15px;
+    background-color: #ffffff;
 }
 
 & .start__description {

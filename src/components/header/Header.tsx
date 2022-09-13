@@ -2,10 +2,14 @@ import React from "react";
 import styled from 'styled-components';
 import { variables } from "../../utils/variables";
 
-const Header = () =>  (
+type PropsType = {
+    title: string,
+}
+
+const Header:React.FC<PropsType> = ({ title }) =>  (
     <StyledHeader className='header'>
         <span className="header__line"/>
-        <div className="header__title">САПЕР</div>
+        <div className="header__title">{title}</div>
         <span className="header__line"/>
     </StyledHeader>
 )

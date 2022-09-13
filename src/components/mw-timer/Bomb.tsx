@@ -1,40 +1,41 @@
 import React  from "react";
 import styled from 'styled-components';
-// import { variables } from "../../utils/variables";
-import mineImg from "../../assets/minesweeper/img/mine.webp"
-import { useAppSelector } from "../../utils/hooks";
+import bombImg from "../../assets/minesweeper/img/mine.webp"
 
-const Bid = () => {
-    const bid = useAppSelector(s => s.minesweeper.bid);
+type PropsType = {
+    bid: number,
+}
+
+const Bomb:React.FC<PropsType> = ({ bid }) => {
     return (
-        <StyledBid className='mine'>
+        <StyledBid className='bomb'>
             <img 
                 width={150}
                 height={120}
-                src={mineImg}
-                className='mine__img'
-                alt={`mine with number ${bid}`}/>
-            <span className="mine__number">{bid}</span>
+                src={bombImg}
+                className='bomb__img'
+                alt={`bomb with number ${bid}`}/>
+            <span className="bomb__number">{bid}</span>
         </StyledBid>
     )
 } 
 
-export default React.memo(Bid);
+export default React.memo(Bomb);
 
 const StyledBid = styled.div`
-&.mine {
+&.bomb {
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-& .mine__img {
+& .bomb__img {
     max-height: 120px;
     transform: translateX(28px);
 }
 
-& .mine__number {
+& .bomb__number {
     position: absolute;
     left: 50%;
     transform: translateX(calc(-50% - 4px));

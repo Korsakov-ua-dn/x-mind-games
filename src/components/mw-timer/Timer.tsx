@@ -1,21 +1,21 @@
 import React from "react";
 import styled from "styled-components";
 import { variables } from "../../utils/variables";
-import Bid from "./Bid";
+import Bomb from "./Bomb";
 
-type TimerType = {
+type PropsType = {
     minutes: number,
-    seconds: number
+    seconds: number,
+    bid: number,
 }
 
-const Timer:React.FC<TimerType> = ({ minutes, seconds}) => {
-
+const Timer:React.FC<PropsType> = ({ minutes, seconds, bid}) => {
     const classN = `${minutes === 0 && seconds < 31 ? "dangerous" : ""}`
 
     return (
         <StyledTimer className="timer">
             <span>{minutes > 9 ? minutes : `0${minutes}`}</span>
-            <Bid/>
+                <Bomb bid={bid}/>
             <span className={classN}>{seconds > 9 ? seconds : `0${seconds}`}</span>
         </StyledTimer>
     )

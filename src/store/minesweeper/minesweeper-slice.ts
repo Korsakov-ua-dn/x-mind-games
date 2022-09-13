@@ -1,7 +1,7 @@
 import { createAction, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 const initialState: minsweeperState = {
-  modal: 'startGame',
+  modal: 'start',
   activeCeilsList: [],
   bid: null,
   listOfSteps: [],
@@ -85,7 +85,7 @@ export default minesweeper.reducer
 
 // types
 type minsweeperState = {
-  modal: 'startGame' | 'youWin' | 'youLose',
+  modal: 'start' | 'win' | 'lose' | 'boom',
   activeCeilsList: number[],
   bid: number | null,
   listOfSteps: number[],

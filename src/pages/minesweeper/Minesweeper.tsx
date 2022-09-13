@@ -4,11 +4,12 @@ import { minesweeperActions } from "../../store/minesweeper/minesweeper-slice";
 
 import Layout from "../../components/common/Layout";
 import PreloadImg from "../../components/common/PreloadImg";
-import GameController from "../../components/playground/GameController";
+import Controller from "../../containers/minesweeper/Controller";
 import Header from "../../components/header/Header";
-import YouLose from "../../components/popups/YouLose";
-import YouWin from "../../components/popups/YouWin";
-import StartGame from "../../components/popups/StartGame";
+import Lose from "../../components/mv-popups/Lose";
+import Win from "../../components/mv-popups/Win";
+import Start from "../../components/mv-popups/Start";
+import Boom from "../../components/mv-popups/Boom";
 
 import boom from "../../assets/minesweeper/img/boom.webp"
 import mine from "../../assets/minesweeper/img/mine.webp"
@@ -28,17 +29,20 @@ const Minesweeper = () => {
 
   const renderModal = (modal: string) => {
     switch (modal) {
-      case "startGame":
-        return <StartGame />;
-      case "youWin":
-        return <YouWin />;
-      case "youLose":
-        return <YouLose />;
+      case "start":
+        return <Start />;
+      case "win":
+        return <Win />;
+      case "lose":
+        return <Lose />;
+      case "boom":
+        return <Boom />;
       default:
         return "";
     }
   };
 
+  // Предзагрузка аудио
   useEffect(() => {
     dispatch(minesweeperActions.preloadSounds());
   }, [dispatch]);
@@ -46,8 +50,8 @@ const Minesweeper = () => {
   return (
     <>
       <Layout>
-        <Header />
-        {bid && <GameController />}
+        <Header title="САПЕР"/>
+        {bid && <Controller bid={bid} />}
       </Layout>
 
       {modal && renderModal(modal)}

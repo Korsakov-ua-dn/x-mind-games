@@ -1,11 +1,15 @@
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { minesweeperActions } from "../../store/minesweeper/minesweeper-slice";
 import { useAppDispatch, useAppSelector } from "../../utils/hooks";
 import { stringFromArray } from "../../utils/stringFromArray";
-import Timer from "../timer/Timer";
-import Playground from "./Playground";
+import Timer from "../../components/mw-timer/Timer";
+import PlaygroundContainer from "./PlaygroundContainer";
 
-const GameController = () => {
+type PropsType = {
+  bid: number,
+}
+
+const Controller:React.FC<PropsType> = ({ bid }) => {
   const dispatch = useAppDispatch();
   const activeCeilsList = useAppSelector((s) => s.minesweeper.activeCeilsList);
   const correctAnswerList = useAppSelector((s) => s.minesweeper.correctAnswerList);
@@ -55,10 +59,10 @@ const GameController = () => {
 
   return (
     <>
-      <Timer minutes={minutes} seconds={seconds} />
-      <Playground />
+      <Timer minutes={minutes} seconds={seconds} bid={bid} />
+      <PlaygroundContainer />
     </>
   );
 };
 
-export default GameController;
+export default React.memo(Controller);

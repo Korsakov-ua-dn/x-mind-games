@@ -4,28 +4,29 @@ import Popup from "../common/Popup";
 import styled from "styled-components";
 import { variables } from "../../utils/variables";
 
-const YouLosePopup = () => (
+const Lose = () => (
     <Popup>
-        <StyledContent className='win'>
+        <StyledContent className='lose'>
             You lose, try again.
         </StyledContent>
     </Popup>
 );
 
-export default React.memo(YouLosePopup);
+export default React.memo(Lose);
 
 const StyledContent = styled.div`
 
-&.win {
+&.lose {
     max-width: 330px;
     width: 100%;
-    padding: 10px;
+    padding: 50px 10px;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 26px;
     font-weight: 700;
     letter-spacing: 1.5px;
-    color: ${variables.accentColor}
+    color: ${variables.accentColor};
+    background-color: #ffffff;
 }
 `

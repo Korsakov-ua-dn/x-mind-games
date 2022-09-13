@@ -6,7 +6,7 @@ import { variables } from "../../utils/variables";
 import { minesweeperActions } from "../../store/minesweeper/minesweeper-slice";
 import { useAppDispatch } from "../../utils/hooks";
 
-const YouWin = () => {
+const Win = () => {
     const dispatch = useAppDispatch();
 
     const nextRoundHandler = () => dispatch(minesweeperActions.nextRound())
@@ -21,7 +21,7 @@ const YouWin = () => {
     )
 };
 
-export default React.memo(YouWin);
+export default React.memo(Win);
 
 const StyledContent = styled.div`
 
@@ -33,6 +33,7 @@ const StyledContent = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    background-color: #ffffff;
 }
 
 & .win__title {

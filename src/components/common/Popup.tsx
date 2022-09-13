@@ -3,12 +3,13 @@ import Portal from "./Portal";
 import styled from "styled-components";
 
 type PopupType = {
-    children: ReactNode
+    children: ReactNode,
+    color?: string,
 }
 
-const Popup:React.FC<PopupType> = ({ children }) => (
+const Popup:React.FC<PopupType> = ({ children, color = "rgba(0, 0, 0, 0.4)" }) => (
     <Portal>
-        <StyledPopup className='popup'>
+        <StyledPopup className='popup' color={color}>
             <div className='popup__background'/>
             <div className='popup__content'>
                 { children }
@@ -32,8 +33,7 @@ const StyledPopup = styled.div`
 & .popup__background {
     width: 100%;
     height: 100%;
-    background-color: black;
-    opacity: 0.4;
+    background-color: ${(props) => props.color};
 }
 
 & .popup__content {
@@ -45,12 +45,13 @@ const StyledPopup = styled.div`
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
     z-index: 1;
-    max-width: 330px;
+    // max-width: 330px;
     width: 100%;
     padding: 15px;
     display: flex;
     flex-direction: column;
-    background-color: #ffffff;
+    justify-content: center;
+    align-items: center;
     border-radius: 4px;
 }
 `
