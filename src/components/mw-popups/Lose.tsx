@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { variables } from "../../utils/variables";
 
 const Lose = () => (
-    <Popup>
+    <Popup color="rgba(255, 255, 255, 1)">
         <StyledContent className='lose'>
             You lose, try again.
         </StyledContent>

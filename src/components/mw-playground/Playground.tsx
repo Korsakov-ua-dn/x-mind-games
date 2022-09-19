@@ -16,20 +16,20 @@ const Playground:React.FC<PropsType> = ({
 
 
     return (
-        <StyledTable
+        <Styled
             aspectRatio={aspectRatio}
             onClick={clickCeilHandler} 
             className={` table`}>
         
             { children }
             
-        </StyledTable>
+        </Styled>
     )
 }
 
 export default React.memo(Playground);
 
-const StyledTable = styled.main`
+const Styled = styled.main`
 &.table {
     display: grid;
     grid-template-columns: repeat(${(props: ThemedStyledProps<Pick<DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement>, "key" | keyof HTMLAttributes<HTMLElement>> & { aspectRatio:number }, any>) => props.aspectRatio}, 1fr);

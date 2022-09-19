@@ -120,16 +120,15 @@ export function* SoundsWorker() {
 }
 
 // watcher Sagas
-export function* start(): SagaIterator  {
+export function* startWatcher(): SagaIterator  {
   yield takeEvery(minesweeperActions.pressStart.type, pressStartWorker)
-  // yield takeEvery('GAME/PRESS_START', pressStartWorker)
 }
 
-export function* win() { 
+export function* winWatcher() { 
   yield takeEvery(minesweeperActions.win.type, winWorker)
 }
 
-export function* lose() { 
+export function* loseWatcher() { 
   yield takeEvery(minesweeperActions.lose.type, LoseWorker)
 }
 
@@ -141,9 +140,9 @@ export function* preloadSounds() {
 // single entry point to start all Sagas at once
 export default function* rootSaga() {
   yield all([
-    start(),
-    win(),
-    lose(),
+    startWatcher(),
+    winWatcher(),
+    loseWatcher(),
     preloadSounds(),
   ])
 }

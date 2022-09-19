@@ -1,18 +1,18 @@
 import React, { useEffect, useMemo } from "react";
 import { useAppDispatch, useAppSelector } from "../../utils/hooks";
 import { minesweeperActions } from "../../store/minesweeper/minesweeper-slice";
-
+// картинки
+import boom from "../../assets/minesweeper/img/boom.webp"
+import mine from "../../assets/minesweeper/img/mine.webp"
+// компоненты
 import Layout from "../../components/common/Layout";
 import PreloadImg from "../../components/common/PreloadImg";
 import Controller from "../../containers/minesweeper/Controller";
 import Header from "../../components/header/Header";
-import Lose from "../../components/mv-popups/Lose";
-import Win from "../../components/mv-popups/Win";
-import Start from "../../components/mv-popups/Start";
-import Boom from "../../components/mv-popups/Boom";
-
-import boom from "../../assets/minesweeper/img/boom.webp"
-import mine from "../../assets/minesweeper/img/mine.webp"
+import Lose from "../../components/mw-popups/Lose";
+import Win from "../../components/mw-popups/Win";
+import Boom from "../../components/mw-popups/Boom";
+import StartPopup from "../../containers/minesweeper/StartPopup";
 
 const Minesweeper = () => {
   const modal = useAppSelector((s) => s.minesweeper.modal);
@@ -30,7 +30,7 @@ const Minesweeper = () => {
   const renderModal = (modal: string) => {
     switch (modal) {
       case "start":
-        return <Start />;
+        return <StartPopup />;
       case "win":
         return <Win />;
       case "lose":
@@ -52,14 +52,16 @@ const Minesweeper = () => {
       <Layout>
         <Header title="САПЕР"/>
         {bid && <Controller bid={bid} />}
-      </Layout>
+      </Layout> 
 
       {modal && renderModal(modal)}
 
       {/* Предварительно рендерю картинки для того что бы их закешировал браузер */}
-      {options.components.map((el, i) => (
-        <PreloadImg key={i} imgComponent={el} />
-      ))}
+      {
+        options.components.map((el, i) => (
+          <PreloadImg key={i} imgComponent={el} />
+        ))
+      }
     </>
   );
 };

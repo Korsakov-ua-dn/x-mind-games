@@ -11,7 +11,7 @@ const Main = () => {
       <Link className="nav__link" to="/minesweeper">
         <img src={minesweeper} alt='bomb with timer' width={'300px'} height={'250px'}/>
       </Link>
-      <Link className="nav__link" to="/labirinth">
+      <Link className="nav__link" to="/labyrinth">
         <img src={labyrinth} alt='bomb with timer' width={'300px'} height={'250px'}/>
       </Link>
     </Styled>

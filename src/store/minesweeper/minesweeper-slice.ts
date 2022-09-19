@@ -90,7 +90,7 @@ type minsweeperState = {
   bid: number | null,
   listOfSteps: number[],
   correctAnswerList: number[],
-  level: "easy" | "medium" | "hard" | "extra hard",
+  level: levelType,
   gameParams: {
     aspectRatio: number,
     delay: number,
@@ -98,3 +98,5 @@ type minsweeperState = {
   },
   sounds: any //@todo clarify types
 }
+
+export type levelType = "easy" | "medium" | "hard" | "extra hard";

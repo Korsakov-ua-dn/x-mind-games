@@ -1,10 +1,9 @@
 import React from "react";
 import {Routes, Route} from "react-router-dom";
-// import Main from "./main/Main";
-// import Minesweeper from "./minesweeper/Minesweeper";
 
 const Main = React.lazy(() => import("./main/Main"));
 const Minesweeper = React.lazy(() => import("./minesweeper/Minesweeper"));
+const Labyrinth = React.lazy(() => import("./labyrinth/Labyrinth"));
 
 const App = () => {
 
@@ -20,8 +19,11 @@ const App = () => {
           <Minesweeper />
         </React.Suspense>
       }/>
-      {/* <Route path={"/login"} element={<Login />} />
-      <Route path={"/profile"} element={<Profile />}/>  */}
+      <Route path={"/labyrinth"} element={
+        <React.Suspense fallback={<>...</>}>
+          <Labyrinth />
+        </React.Suspense>
+      }/>
     </Routes>
   );
 };

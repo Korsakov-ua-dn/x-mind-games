@@ -5,4 +5,3 @@ export const getRandomInt = (min: number, max: number) => {
   }
 
 // пример getRandomInt(1, 9) => от 1 до 9
-

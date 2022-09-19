@@ -1,11 +1,23 @@
 import createSagaMiddleware from "redux-saga";
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import rootSaga from "./minesweeper/sagas";
+import { all } from "redux-saga/effects";
+
+import minesweeperSaga from "./minesweeper/sagas";
+import labyrinthSaga from "./labyrinth/sagas";
 import minesweeper from "./minesweeper/minesweeper-slice";
+import labyrinth from "./labyrinth/labyrinth-slice";
 
 const rootReducer = combineReducers({
     minesweeper,
+    labyrinth,
 });
+
+function* rootSaga() {
+    yield all([
+        minesweeperSaga(),
+        labyrinthSaga(),
+    ])
+  }
 
 const sagaMiddleware = createSagaMiddleware()
 
