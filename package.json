@@ -61,10 +61,6 @@
       "last 1 safari version"
     ]
   },
-  "engines": {
-    "node": "16.15.1",
-    "npm": "8.11.0"
-  },
   "devDependencies": {
     "@types/howler": "^2.2.7",
     "@types/styled-components": "^5.1.26"
